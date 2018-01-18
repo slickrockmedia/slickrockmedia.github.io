@@ -153,12 +153,12 @@ function convertISBN(isbn)
   		var xhttp = new XMLHttpRequest();
 		xhttp.open("GET", "https://www.amazon.com/gp/offer-listing/"+ isbn , true);
 		//xhttp.withCredentials = true;
-		//xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Authorization, Content-Type, Accept, X-Auth-Token, X-Requested-With, Session');
+		xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Authorization, Content-Type, Accept, X-Auth-Token, X-Requested-With, Session');
     		//xhttp.setRequestHeader('Content-type', 'application/javascript');
                 //xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET, POST');
 		//xhttp.setRequestHeader('Access-Control-Allow-Headers', '*');
 		
-    		xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
+    		xhttp.setRequestHeader('Access-Control-Allow-Origin', 'https://slickrockmedia.github.io');
 		//https://slickrockmedia.github.io/search.html
 		//xhr.setRequestHeader('Access-Control-Request-Method', 'POST')
 		//setRequestHeader('X_ConnectTo', 'X-Author-CRM');
