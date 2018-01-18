@@ -152,11 +152,11 @@ function convertISBN(isbn)
 		//var isbn = document.getElementById("Term").value;
 		// var isbn = '0026166003';
   		var xhttp = new XMLHttpRequest();
-		xhttp.open("GET", "http://www.amazon.com/gp/offer-listing/"+ isbn , true);
+		xhttp.open("POST", "http://www.amazon.com/gp/offer-listing/"+ isbn , true);
 		//xhttp.withCredentials = true;
 		//xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Authorization, Content-Type, Accept, X-Auth-Token, X-Requested-With, Session');
     		//xhttp.setRequestHeader('Content-type', 'application/javascript');
-                xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET');
+                xhttp.setRequestHeader('Access-Control-Allow-Methods', 'POST');
 		//xhttp.setRequestHeader('Access-Control-Request-Method', 'GET');
 		xhttp.setRequestHeader('Access-Control-Allow-Headers', '*');
     		xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
