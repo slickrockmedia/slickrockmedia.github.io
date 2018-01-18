@@ -10,15 +10,10 @@
 			try1();
         	}
     	}
-	
-function try0 () {
-document.getElementById("yy").innerHTML = "working!!";
-}
+
 function convertISBN(isbn)
 {
 	// Set default variables and cleanup ISBN
-	//var form = document.isbncnvt;
-	//form.isbn_in.value = form.isbn_in.value.replace(/[-\s]/g,"").toUpperCase();
 	var isbnnum = isbn;
 	var isbn10exp = /^\d{9}[0-9X]$/;
 	var isbn13exp = /^\d{13}$/;
@@ -28,8 +23,6 @@ function convertISBN(isbn)
 	// Preliminary validation
 	if (isbnlen == 0) {
 		alert("Please enter an ISBN to convert in the first box.");
-        //form.isbn_in.focus();
-      	//form.isbn_in.select();
        	return false;
    	}
 
@@ -49,8 +42,6 @@ function convertISBN(isbn)
  			alert("This ISBN is invalid." + "\n" +
 		   	      "It contains invalid characters.");			
 		}
-          	//form.isbn_in.focus();
-          	//form.isbn_in.select();
           	return false;
     	}
 
@@ -108,8 +99,6 @@ function convertISBN(isbn)
 			z = (10 - (total % 10)) % 10; 
 			alert("This 13-digit ISBN is invalid." + "\n" +
 			      "The check digit should be " + z + ".");
-			//form.isbn_in.focus();
-			//form.isbn_in.select();
 			return false;
 		}
 		else {
@@ -117,8 +106,6 @@ function convertISBN(isbn)
 			if ((isbnnum.substring(0,3) != "978")) {
 				alert("This 13-digit ISBN does not begin with \"978\"" + "\n" +
 				      "It cannot be converted to a 10-digit ISBN.");
-				//form.isbn_in.focus();
-				//form.isbn_in.select();
 				return false;
 			}
 			else {
@@ -133,19 +120,10 @@ function convertISBN(isbn)
 		}
 	}
 	document.getElementById("yy").innerHTML =  isbnnum+z;
-	//return true;
 	return isbnnum+z;
 }
 
-
-	function try5() {
-		fetch('http://www.icanhazip.com').then((resp)=>{ return resp.text() }).then((text)=>{ console.log(text) })
-
-	}
-
 	function try1() {
-		document.getElementById("Term").focus();
-		document.getElementById("Term").select();
 		
 		var isbn = convertISBN(document.getElementById("Term").value);
 
@@ -169,29 +147,15 @@ function convertISBN(isbn)
   		};
   		xhttp.send();
 		document.getElementById("Term").focus();
-		document.getElementById("Term").select();		
-	}
-	function try3() {
-		fetch('http://www.icanhazip.com' )
-		.then(function(response) {
-    		document.getElementById("resp").innerHTML = response.text();
-		}); 
-	}
-	
-	function hit() {
-	document.getElementById("yy").innerHTML = "HIT";
+		document.getElementById("Term").select();
+		document.getElementById("Term").value = '';
 	}
 </script>
 </head>
-<body>
+<body>	
 <input type="text" id="Term" autofocus="autofocus">
 <input type="button" onclick="try1()">
-<input type="button" onclick="try2()">
-<input type="button" onclick="try3()">
-<input type="button" onclick="convertISBN('9780064404990')">
 
-<p id="xx"></p>
-<p id="yy"></p>
 <p id="resp"></p>
 
 </body>
