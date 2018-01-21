@@ -152,7 +152,13 @@ function convertISBN(isbn)
 	}
 	function try2() {
 		var isbn = convertISBN(document.getElementById("Term").value);
-		window.location.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
+		//window.location.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
+		var a = document.createElement('a');
+		//var linkText = document.createTextNode("raw amazon xml results");
+		//a.appendChild(linkText);
+		a.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
+		document.body.appendChild(a);
+		
 	}
 </script>
 </head>
