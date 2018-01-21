@@ -154,8 +154,8 @@ function convertISBN(isbn)
 		var isbn = convertISBN(document.getElementById("Term").value);
 		//window.location.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
 		var a = document.createElement('a');
-		//var linkText = document.createTextNode("raw amazon xml results");
-		//a.appendChild(linkText);
+		var linkText = document.createTextNode("amz");
+		a.appendChild(linkText);
 		a.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
 		document.getElementById("resp").appendChild(a);
 		
@@ -163,7 +163,7 @@ function convertISBN(isbn)
 </script>
 </head>
 <body>	
-<input type="text" id="Term" autofocus="autofocus">
+<input type="text" id="Term" autofocus="autofocus" value='9780064405058'>
 <input type="button" onclick="try1()">
 <input type="button" onclick="try2()">
 <p id="yy"></p>
