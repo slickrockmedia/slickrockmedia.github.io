@@ -6,10 +6,12 @@
         var keyCode = evt ? (evt.which ? evt.which : evt.keyCode) : event.keyCode;
         	if(keyCode == 13)
         	{
-            		//alert("key code");
 			try1();
         	}
     	}
+
+
+
 
 function convertISBN(isbn)
 {
@@ -119,46 +121,98 @@ function convertISBN(isbn)
 			}
 		}
 	}
-	document.getElementById("yy").innerHTML =  isbnnum+z;
+	document.getElementById("isbn_resp").innerHTML =  isbnnum+z;
 	return isbnnum+z;
 }
-
-	function try1() {
-		
+	function try1() {	
 		var isbn = convertISBN(document.getElementById("Term").value);
-
-		//var isbn = document.getElementById("Term").value;
-		// var isbn = '0026166003';
   		var xhttp = new XMLHttpRequest();
 		xhttp.open("GET", "http://www.amazon.com/gp/offer-listing/"+ isbn , true);
-		//xhttp.withCredentials = true;
-		//xhttp.setRequestHeader('Access-Control-Allow-Headers', 'Origin, Authorization, Content-Type, Accept, X-Auth-Token, X-Requested-With, Session');
-    		//xhttp.setRequestHeader('Content-type', 'application/javascript');
-                //xhttp.setRequestHeader('Access-Control-Allow-Methods', 'GET');
-		//xhttp.setRequestHeader('Access-Control-Request-Method', 'GET');
-		//xhttp.setRequestHeader('Access-Control-Allow-Headers', '*');
-    		//xhttp.setRequestHeader('Access-Control-Allow-Origin', '*');
   		xhttp.onreadystatechange = function() {
-   		 if (this.readyState == 4 && this.status == 200) {
-   		   document.getElementById("resp").innerHTML =
-   		   this.response;
-		
-   		 }
+   		  	if (this.readyState == 4 && this.status == 200) {
+   		    		
+				//var offers = this.responseXML.getElementsByClassName("a-row a-spacing-mini olpOffer");
+				
+				var offers = this.responseXML.getElementsByClassName("a-column a-span2 olpPriceColumn");
+				var output ='starting...' + offers.length + ' : ' ;
+				//window.alert(output);
+				for(var i=0; i<offers.length; i++) {		
+					output = output.concat( offers[i].innerHTML );
+				}
+				//output = offers[3].innerHTML.trim();
+				document.getElementById("amz_resp").innerHTML = output;
+				//this.responseXML.getElementsByClassName("a-row a-spacing-mini olpOffer")[0].innerHTML;
+				 // this.responseXML.getElementsByClassName("a-column a-span2 olpPriceColumn")[3].innerHTML.trim(); 
+		//this.responseXML.getElementById("olpOfferListColumn").innerHTML;
+		//a-column a-span2 olpPriceColumn
+		//this.responseXML.getElementsByTagName("title")[0].innerHTML;
+		//this.responseXML.children[1].innerHTML;
+		//this.responseXML.body.innerHTML;
+
+		    
+
+			//9780064405058
+   		  	}
   		};
+		xhttp.responseType = "document";
   		xhttp.send();
+		//http://www.sellbackyourbook.com/pricelist.php?isbn=1259231984
 		document.getElementById("Term").focus();
 		document.getElementById("Term").select();
 		document.getElementById("Term").value = '';
 	}
-	function try2() {
+	function try2() {	
+		var isbn = convertISBN(document.getElementById("Term").value);
+  		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "https://api.bookscouter.com/v3/prices/sell/"+ isbn , true);
+  		xhttp.onreadystatechange = function() {
+   		  if (this.readyState == 4 && this.status == 200) {
+   		    document.getElementById("bs_resp").innerHTML =
+   		    this.response;
+   		  }
+  		};
+  		xhttp.send();
+		//http://www.sellbackyourbook.com/pricelist.php?isbn=1259231984
+		document.getElementById("Term").focus();
+		document.getElementById("Term").select();
+		document.getElementById("Term").value = '';
+	}
+	function try3() {
 		var isbn = convertISBN(document.getElementById("Term").value);
 		//window.location.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
-		var a = document.createElement('a');
-		var linkText = document.createTextNode("amz");
-		a.appendChild(linkText);
-		a.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
-		document.getElementById("resp").appendChild(a);
 		
+		
+		//var img = document.createElement('img');
+		//var linkText = document.createTextNode("amz");
+		//p.appendChild(linkText);
+		//img.src = "http://www.amazon.com/gp/offer-listing/" + isbn;
+		//img.width="9000";
+        //img.height="9000";
+		//document.body.appendChild(img);
+		//document.body.appendChild(img);
+		
+		
+		var frame = document.createElement('iframe');
+		//frame.src = "http://www.amazon.com/gp/offer-listing/"+isbn;
+		frame.src = "http://www.cnn.com";
+		frame.width="100%";
+		frame.height="4000";
+		frame.scrolling="yes";
+		
+		document.body.appendChild(frame);
+
+		 //width="100%" height="4000" frameborder="0" scrolling="no"></iframe>
+		
+		var a = document.createElement('input');		
+		a.type = "text";
+		a.id = "input2";
+		a.value = "9780064405058";
+		document.body.appendChild(a);
+		document.getElementById("input2").focus();
+        document.getElementById("input2").select();
+		
+		//a.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
+		//document.getElementById("resp").appendChild(a);
 	}
 </script>
 </head>
@@ -166,8 +220,10 @@ function convertISBN(isbn)
 <input type="text" id="Term" autofocus="autofocus" value='9780064405058'>
 <input type="button" onclick="try1()">
 <input type="button" onclick="try2()">
-<p id="yy"></p>
-<p id="resp"></p>
+<input type="button" onclick="try3()">
 
+<p id="isbn_resp">isbn : </p>
+<p id="amz_resp">amazon : </p>
+<p id="bs_resp">bookscouter : </p>
 </body>
 </html>
