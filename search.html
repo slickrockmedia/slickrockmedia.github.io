@@ -151,6 +151,7 @@ function convertISBN(isbn)
 		document.getElementById("Term").value = '';
 	}
 	function try2() {
+		var isbn = convertISBN(document.getElementById("Term").value);
 		window.location.href = "http://www.amazon.com/gp/offer-listing/" + isbn;
 	}
 </script>
